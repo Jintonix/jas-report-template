@@ -3,33 +3,62 @@
 Jedes Kapitel beginnt mit dem \texttt{\textbackslash Chapter{}} command. Wenn du ein neues erstellst, muss das im neuen Dokument an erster Stelle. Direkt im Anschluss das \texttt{\textbackslash chapteroverlay} -- das ist mein Styling für Kapitelseiten.
 
 \section{Strukturierung}
-Du strukturierst dein Dokument mit Befehlen wie \texttt{\textbackslash section}, \texttt{\textbackslash subsection} und sogar \texttt{\textbackslash subsubsection}. LaTeX kümmert sich automatisch um die Nummerierung und das Inhaltsverzeichnis.
+Man strukturiert sein Dokument mit Befehlen wie \texttt{\textbackslash section}, \texttt{\textbackslash subsection} und \texttt{\textbackslash subsubsection}. LaTeX kümmert sich automatisch um die Nummerierung und das Inhaltsverzeichnis.
 
+% ---------------------------
+% ---------- TEXT -----------
+% ---------------------------
 \section{Text formatieren}
 In \LaTeX schreibst du einfach deinen Text. Ein einfacher Zeilenumbruch im Code wird im PDF ignoriert. Für einen neuen Absatz lässt du im Code einfach eine Zeile frei.
 
-\section*{Kurzübersicht: Text-Formatierung}
+\textbf{Wichtige Textbefehle}
 
-In der folgenden Tabelle findest du die wichtigsten Befehle für den täglichen Schreibfluss. Nutze diese, um dein Dokument professionell zu setzen:
+Hier siehst du, wie kleine Befehle das Schriftbild verändern. 
 
-\begin{table}[h]
-\centering
-\renewcommand{\arraystretch}{1.5} % Erhöht den Zeilenabstand in der Tabelle für bessere Lesbarkeit
-\begin{tabular}{p{3.5cm} p{3.5cm} p{6cm}}
-\hline
-\textbf{Ziel} & \textbf{LaTeX-Code} & \textbf{Anmerkung} \\ \hline
-Neuer Absatz & (Leerzeile) & Standardweg für eine logische Trennung. \\
-Manueller Umbruch & \texttt{\textbackslash\textbackslash} & Erzwingt eine neue Zeile (sparsam nutzen!). \\
-Kein Einzug & \texttt{\textbackslash noindent} & Unterdrückt das Einrücken der ersten Zeile. \\
-Schmales Leerzeichen & \texttt{\textbackslash thinspace} & Perfekt für Abkürzungen wie \textit{z.\thinspace B.} \\
-Geschützter Abstand & \texttt{\~} & Verhindert Umbruch (z.\thinspace B. \textit{Prof.~Dr.}). \\
-Sonderzeichen & \texttt{\textbackslash\%} oder \texttt{\textbackslash\$}  & Sonderzeichen haben teilweise Funktionen zugewiesen und müssen escaped werden. \\ \hline
-\end{tabular}
-\caption{Schnellreferenz für Textbefehle}
-\end{table}
+\vspace{1em} % Ein bisschen Platz davor
+
+\noindent
+\textbf{1. Der normale Absatz:} \\
+Einfach eine Leerzeile im Code lassen. 
+
+Das hier ist ein neuer Absatz mit dem Standard-Einzug von LaTeX.
+
+\vspace{1em}
+\noindent
+\textbf{2. Zeilenumbruch ohne Einzug:} \\
+\texttt{\textbackslash noindent} sorgt dafür, dass die Zeile ganz links beginnt. \\
+Mit \texttt{\textbackslash\textbackslash} erzwingst du diesen Umbruch.
+
+\vspace{1em}
+\noindent
+\textbf{3. Das schmale Leerzeichen (Abkürzungen):} \\
+Schreibe: \texttt{z.\textbackslash thinspace} für kleine Abstände\\
+Ergebnis: z.\thinspace B. (Sieht professioneller aus als z.B. oder z. B.)
+
+\vspace{1em}
+\noindent
+\textbf{4. Der geschützte Abstand (Kein Umbruch):} \\
+Die Tilde (\textasciitilde) verhindert, dass der Name am Zeilenende getrennt wird. \\
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum sapien dui quisati  Prof.~Dr.~Nase
+
+\vspace{1em}
+\noindent
+\textbf{5. Der korrekte Gedankenstrich:} \\
+zwei oder drei - erzeugen en-/emdashes:\\
+emdash: Text -- ein Einschub -- Text\\
+endash: Text --- ein Einschub --- Text
+
+\vspace{1em}
+\noindent
+\textbf{6. Sonderzeichen escapen:} \\
+Sonderzeichen müssen in \LaTeX escaped werden, da einige von ihnen für andere Befehle verwendet werden. \\
+Hierfür wird der  \texttt{\textbackslash} verwendet.\\
+\texttt{\%} beginnt Kommentare und kann mit  \texttt{\textbackslash\%} als normales Zeichen verwendet werden.
+
+
 
 \begin{quote}
-    \textbf{Wichtiger Hinweis:} LaTeX kümmert sich um 99\% des Layouts. Wenn du merkst, dass du ständig \texttt{\textbackslash\textbackslash} oder \texttt{\textbackslash noindent} benutzt, stimmt meistens etwas mit der Absatzstruktur nicht.
+    \textbf{Hinweis:} LaTeX kümmert sich um 99\% des Layouts. Wenn du merkst, dass du ständig \texttt{\textbackslash\textbackslash} oder \texttt{\textbackslash noindent} benutzt, stimmt meistens etwas mit der Absatzstruktur nicht.
 \end{quote}
 
 \newpage
@@ -45,22 +74,58 @@ Du kannst Text ganz einfach formatieren:
     \textbf{Für eigene Farben:} Wenn du eine spezielle Farbe öfter brauchst, kannst du sie in der \texttt{JASstyle.sty} mit \texttt{\textbackslash definecolor\{Name\}\{RGB\}\{R, G, B\}} oder \newline \texttt{\textbackslash definecolor\{Name\}\{HTML\}\{Hex-Werte\}}  einmalig festlegen und dann überall im Dokument über den Namen nutzen.
 \end{quote}
 
+% ---------------------------
+% --------- TABELLE ---------
+% ---------------------------
 \section{Tabellen \& Aufzählungen}
-Aufzählung mit Bulletpoints:
+\textbf{Aufzählung mit Bulletpoints:}
 \begin{itemize}
-    \item Einführung in textile Techniken und die Kettenwirkerei
-    \item Bindungslehre und die Analyse von Stoffen
-    \item Praktisches Arbeiten an Schulungsmaschinen zur Fehleranalyse und Bedienung
-    \item Technische Kalkulationen und Wartungsmaßnahmen
+    \item Erster wichtiger Punkt
+    \item Zweiter wichtiger Punkt
 \end{itemize}
 
-Aufzählung mit Nummern:
+\vspace{1em}
+\noindent
+\textbf{Aufzählung mit Nummern:}
 \begin{enumerate}
-    \item \textbf{Serviceunterstützung und Ersatzteilversorgung:} Ein weltweit vernetztes Team von Experten steht für alle maschinenbezogenen Fragen zur Verfügung. Die Dienstleistungen umfassen Remote Service zur Reduzierung von Stillstandszeiten sowie einen schnellen Ersatzteilservice. Über ein 24/7 zugängliches Kundenportal wird der zielgerichtete Support organisiert.
-    \item \textbf{Wissensvermittlung (Know-how):} Durch langjährige Erfahrung im Textilmaschinenbau unterstützt das Unternehmen Kunden bei der Maschinenbedienung, Wartung und der Textilentwicklung.
-    \item \textbf{Online-Lösungen:} Digitale Services (wie das Kundenportal und die digitalen Produkte) maximieren den Wert der Maschinen durch Konnektivität. Sie liefern wertvolle Erkenntnisse zur Optimierung der Maschinenleistung und zur Steigerung der Gesamtanlageneffektivität (OEE).
+    \item \textbf{Schritt 1:} Vorbereitung des Projekts.
+    \item \textbf{Schritt 2:} Durchführung der Analyse.
 \end{enumerate}
 
+
+\subsection{Einfache Tabellen}
+Tabellen wirken im Code oft kompliziert. Hier ist ein Minimalbeispiel, das ihr einfach kopieren und füllen könnt:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll} % 'll' steht für zwei linksbündige Spalten
+\hline
+\textbf{Key} & \textbf{Value} \\ \hline
+Projektname & Praxisbericht 2026 \\
+Status & In Arbeit \\ \hline
+\end{tabular}
+\end{table}
+
+%-------------------------
+\subsection{Größere Tabelle}
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.5} % Erhöht den Zeilenabstand in der Tabelle für bessere Lesbarkeit
+\begin{tabular}{p{3.5cm} p{3.5cm} p{6cm}} % Definierte Spalten größe
+\hline
+\textbf{Name} & \textbf{Code} & \textbf{Bescchreibung} \\ \hline
+Name 1 & Code 1 & Die 1 Beschreibung dazu \\
+Name 2 & Code 2 & Die 2 Beschreibung dazu  \\
+Name 3 & Code 3 & Die 3 Beschreibung dazu  \\
+Name 4 & Code 4 & Die 4 Beschreibung dazu  \\
+\hline
+\end{tabular}
+\caption{Schnellreferenz für Textbefehle}
+\end{table}
+
+% ---------------------------
+% --------- BILDER ----------
+% ---------------------------
 \section{Bilder}
 \begin{figure}[H]
 \centering
@@ -68,16 +133,11 @@ Aufzählung mit Nummern:
     \caption{Beispielhaftes Bild mit caption}
 \end{figure}
 
+% ---------------------------
+% ----------- CODE ----------
+% ---------------------------
 \section{Codeblocks}
-\begin{lstlisting} [style=csh-clean, caption={Child-Komponente: ruft CRUD Befehle auf}]
-// Der Konstruktor ruft hier das DelegateCCommand auf:
-public DepartmentEditorViewModel(ObservableCollection<DepartmentViewModel> allDepartments, DepartmentDropdownViewModel dropdownVM, Action<Department, string> onDepartmentEdited, Action<Department> onDepartmentDeleted)
-        {
-            ...
-            DeleteDepartmentCommand = new DelegateCommand<Department>(ExecuteDeleteDepartment);
-
-        }
-
+\begin{lstlisting} [style=csh-clean, caption={Eine Caption für den Code}]
 public ICommand DeleteDepartmentCommand { get; }
 
  private void ExecuteDeleteDepartment(Department dep)
@@ -92,7 +152,7 @@ public ICommand DeleteDepartmentCommand { get; }
 \begin{tikzpicture}[
   font=\rmfamily\footnotesize,
   every matrix/.style={ampersand replacement=\&,column sep=2cm,row sep=.6cm},
-  source/.style={draw,thick,rounded corners,fill=KM_teal!20,inner sep=.3cm},
+  source/.style={draw,thick,rounded corners,fill=yellow!20,inner sep=.3cm},
   process/.style={draw,thick,circle,fill=blue!20},
   sink/.style={source,fill=green!20},
   datastore/.style={draw,very thick,shape=datastore,inner sep=.3cm},
@@ -102,11 +162,11 @@ public ICommand DeleteDepartmentCommand { get; }
 
   % Position the nodes using a matrix layout
   \matrix{
-    \node[source] (a) {ChildViewModel}; \& \& \\
-     \& \& \node[source] (b) {DataModels};\\
-     \node[source] (c) {ParentViewModel}; \& \node[source] (d) {DataProvider};\\
-     \& \& \node[source] (e) {DataViewModels};\\
-     \node[source] (f) {MainViewModel}; \& \& \\      
+    \node[source] (a) {A}; \& \& \\
+     \& \& \node[source] (b) {V};\\
+     \node[source] (c) {C}; \& \node[source] (d) {D};\\
+     \& \& \node[source] (e) {E};\\
+     \node[source] (f) {F}; \& \& \\      
   };
 
 % Draw the arrows between the nodes and label them.
@@ -115,9 +175,9 @@ public ICommand DeleteDepartmentCommand { get; }
   \draw[to] (f) to[bend right=20] node[midway,below] {passes event data} (d);
   \draw[to] (f) to[bend right=20] node[midway,below] {passes event data} (e);
   \draw[to] (d)-- node[midway,below] {new data is saved} (b);
+
   % Draw the dotted surrounding lines and add the labels as separate nodes
   % This is necessary because the anchor of the fitted node is always center
-
   \node[draw,dotted,fit=(a) (c) (d) (f),inner sep=4ex,] (ACDF) {};
   \node[above=-3ex of ACDF] (ACDFt) {Logic execution};
   \node[draw,dotted,fit=(b) (e), inner sep=4ex] (BE) {};
