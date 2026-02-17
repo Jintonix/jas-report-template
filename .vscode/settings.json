@@ -1,0 +1,7 @@
+{
+    "latex-workshop.latex.outDir": "Output",
+    "latex-workshop.latex.clean.subfolder.enabled": true,
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.view.pdf.zoom": 1.4,
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click"
+}

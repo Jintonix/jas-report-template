@@ -1,0 +1,234 @@
+% --------------------------------------------
+% --------------- CORE LAYOUT ----------------
+% --------------------------------------------
+\RequirePackage[a4paper, left=3cm, right=3cm, top=2cm, bottom=2.5cm, footskip=1.2cm]{geometry}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[ngerman]{babel} % uses german as the language
+\linespread{1.1} %space between lines
+% \renewcommand{\textendash}{\color{KM_teal}\rule[0.6ex]{1em}{1.7pt}}
+
+% --------------------------------------------
+% ----------- OVERARCHING PACKAGES -----------
+% --------------------------------------------
+\RequirePackage{graphicx} % Required for inserting images
+\RequirePackage{float} % Allows us to set the position of images
+\RequirePackage{tikz} %gives pixel level controll over things and adds \node \draw
+\usetikzlibrary{calc,arrows,fit,positioning} %required to calc position of tikz objects & for graphs
+\RequirePackage{titlesec}
+\RequirePackage{xurl} %for displaying urls 
+\RequirePackage[colorlinks=true, allcolors=KM_teal]{hyperref} % Makes the link clickable
+\RequirePackage[most]{tcolorbox} %used to create fancier boxes
+\RequirePackage{caption}
+\captionsetup[listing]{skip=-7pt} %adjust caption distance to object
+
+
+% --------------------------------------------
+% ------------------ COLORS ------------------
+% --------------------------------------------
+\RequirePackage{xcolor}
+
+\definecolor{KM_teal}{RGB}{0, 140, 125}
+\definecolor{Blazor_purple}{RGB}{92, 45, 145}
+
+\definecolor{darkgrayframe}{RGB}{40, 42, 44}
+\definecolor{grayframe}{gray}{0.8}
+
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{darkred}{rgb}{0.5,0,0}
+
+\definecolor{vsPink}{HTML}{C586C0}
+\definecolor{vsBlue}{HTML}{2472B3}
+\definecolor{vsTeal}{HTML}{4EC9B0}
+\definecolor{vsYellow}{HTML}{EBBB4B}
+\definecolor{vsOrange}{HTML}{CE9178}
+\definecolor{vsGreen}{HTML}{6A9955}
+\definecolor{vsLightBlue}{HTML}{9CDCFE}
+\definecolor{vsLimeGreen}{HTML}{3ECF75}
+
+
+% --------------------------------------------
+% ------------ HEADERS & FOOTERS -------------
+% --------------------------------------------
+\RequirePackage{fancyhdr}
+\RequirePackage{fmtcount} %get leading 0s on Chapters
+
+\def\myName{Name}
+\def\sNummer{sNummer}
+% --- Page Number Command ---
+% ---------------------------
+\newcommand{\MyPageBar}[1]{%
+    \begin{tikzpicture}[remember picture, overlay]
+        % 1. Draw the Teal Bar
+        % Adjust the (0.6, -2.0) to change width and length
+        \fill[KM_teal] (-0.4, 0.2) rectangle (0.4, -2.0); 
+        
+        % 2. Place the Number
+        % This stays anchored to the 0,0 point of the footer
+        \node[text=white, font=\Large\bfseries] at (0, -0.2) {#1};
+    \end{tikzpicture}%
+}
+\newcommand{\myfancybox}{\MyPageBar{\thepage}}
+
+% --- Global Header/Footer Settings ---
+% -------------------------------------
+\pagestyle{fancy}
+\fancyhf{} % Clear everything once
+
+% --- Apply to Non-Chapter pages ---
+% ----------------------------------
+\renewcommand{\headrule}{%
+  \color{KM_teal}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth
+}
+\fancyhead[C]{\slshape \leftmark}
+\fancyfoot[R]{\myfancybox}
+\fancyfoot[L]{\hspace{1mm} \myName \thinspace \textbar \hspace{1mm} \sNummer}
+
+% --- Apply to Chapter pages  ---
+% -------------------------------
+% we need to change the style, because by default chapter pages overwrite the default with plain -> no header or footers
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt} % No line on chapter start
+    \fancyfoot[R]{\myfancybox}        % Same box as above!
+    \fancyfoot[L]{\hspace{1mm} \myName \thinspace \textbar \hspace{1mm} \sNummer}
+}
+
+% ------ Chapter Header format ------
+% -----------------------------------
+\titleformat{\chapter}[block] 
+  {\normalfont\color{KM_teal}\fontsize{30}{45}\selectfont\bfseries} % title font
+  {}               % chapter number
+  {0pt}            % space between number and title
+  {  }    
+\titlespacing*{\chapter}{1.2cm}{-1.5cm}{1cm}
+
+% --- Numberless Chapter Header format ---
+% ----------------------------------------
+\titleformat{name=\chapter,numberless}[block]
+  {\normalfont\color{KM_teal}\fontsize{30}{45}\selectfont\bfseries\filcenter} % title font
+  {}
+  {0pt}
+  {}
+
+\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{15pt}
+
+% --- Hook to place TikZ overlay on Header ---
+% --------------------------------------------
+\newcommand{\chapteroverlay}{
+  \begin{tikzpicture}[remember picture,overlay]
+    \coordinate (chref) at ($(current page.north west) + (2cm,-2cm)$);
+
+    % Big chapter number
+    \node[anchor=north west] (chnum) at ($(chref.west)+ (0.2em,-8em)$)
+      {\scalebox{5}{\color{KM_teal} \padzeroes[2]{\decimal{chapter}}}};
+      
+    % "Chapter" label under number
+    \node[anchor=north west] (chlabel) at ($(chnum.south west) + (0.4em,5.5em)$)
+      {\large\color{KM_teal} Kapitel};
+    
+    % Vertical line
+    \draw[line width=12pt, color=KM_teal] ($(chref) + (1cm,2cm)$) -- ++ (0cm, -4cm) coordinate (linend);
+
+  \end{tikzpicture}
+  \vspace*{8em}\par\noindent
+}
+
+% --------------------------------------------
+% -------- CUSTOM COMMANDS & MACROS   --------
+% --------------------------------------------
+\RequirePackage{listings} %used to show codeblocks
+\RequirePackage{minted}% better syntax highlighting
+
+% ---- Custom commands   ----
+% ---------------------------
+\newcommand{\nn}{\newline\noindent}
+
+% --- Codeblock styling   ---
+% ---------------------------
+
+\newtcbox{\gitBranchInline}{
+  on line,
+  colback=darkgrayframe,
+  colframe=darkgrayframe,
+  coltext=white,
+  arc=2pt,
+  boxsep=1pt,
+  left=2pt,
+  right=2pt,
+  top=1pt,
+  bottom=1pt,
+  fontupper=\ttfamily
+}
+% Custom C-sharp
+\lstdefinelanguage{csharp}{
+    keywords={\(, \), => \{, \}},
+    keywordstyle=\color{orange}\bfseries,
+    morekeywords=[2]{if, for, while, foreach, void},
+    keywordstyle=[2]\color{purple}\bfseries,
+    morekeywords=[3]{null, new, nameof, this, public, class},
+    keywordstyle=[3]\color{blue}\bfseries,
+    morekeywords=[4]{int, string, bool},
+    alsoletter={<,>},
+}
+
+\lstdefinelanguage{csharp}{
+    % --- 1. Basic Keywords ---
+    keywords=[1]{if, foreach, while, else, in, return, },
+    keywordstyle=[1]\color{vsPink}\bfseries,
+    morekeywords=[2]{using, namespace, public, private, protected, override, class, event, readonly, string, int, new, void, this, new, get, set, null, object, nameof, bool, async, true, false, var, this},
+    keywordstyle=[2]\color{vsBlue}\bfseries,
+    % classes
+    morekeywords=[3]{Task,Parameter, Console, List, ObservableCollection, PropertyChangedEventArgs, Action, PropertyChangedEventHandler},
+    keywordstyle=[3]\color{vsTeal}\bfseries,
+    % functions
+    morekeywords=[4]{Delay, StateHasChanged, IsNullOrWhiteSpace, HandleKeyUp, Execute, OnInitialized, InvokeAsync, HandlePropertyChanged, FirstOrDefault, Invoke, WriteLine, Remove, First, Add, ContainsKey, Equals},
+    keywordstyle=[4]\color{vsYellow}\bfseries,
+    % special Types
+    morekeywords=[5]{KeyValuePair, TimeSpan, DateTime},
+    keywordstyle=[5]\color{vsLimeGreen}\bfseries,
+    % --- 2. Custom keywords ---
+    % variables
+    morekeywords=[6]{e, _, __, val, newDepartment, sender},
+    keywordstyle=[6]\color{vsLightBlue}\bfseries,
+    % function calls
+    morekeywords=[7]{UpdateDepartment},
+    keywordstyle=[7]\color{vsYellow}\bfseries,
+    % Classes
+    morekeywords=[8]{Department, WorkSpace, Machine, MachineProgram, MetaDataProgramEditObject, MetaDataWorkSpaceEditObject, DepartmentViewModel},
+    keywordstyle=[8]\color{vsTeal}\bfseries,
+    % --- 3. Comments ---
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{green}\itshape,
+    % --- 4. Strings ---
+    morestring=[b]",
+    morestring=[b]',
+    stringstyle=\color{brown},
+    % --- 5. Symbols & Operators ---
+    % Instead of keywords, we use literate for symbols
+    literate={{=>}{{{\textit{\color{gray}=>}}}}2
+             {==}{{{\textit{\color{gray}==}}}}2
+             {++}{{{\textit{\color{gray}++}}}}2
+             {!=}{{{\textit{\color{gray}!=}}}}2
+             {+=}{{{\textit{\color{vsYellow}+=}}}}2
+             },
+    % 6. Cleanup
+    sensitive=true,
+    alsoletter={<,>},
+}
+
+% style code box
+\lstdefinestyle{csh-clean}{
+    language=csharp,
+    basicstyle=\ttfamily\small,
+    frame=single,
+    rulecolor=\color{grayframe},
+    breaklines=true,
+    captionpos=b,
+    numbers=left,
+    numberstyle=\scriptsize\color{gray},
+    tabsize=4,
+    showstringspaces=false,
+}

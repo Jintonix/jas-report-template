@@ -1,0 +1,19 @@
+\chapter*{Umgebung Einrichten}
+
+\section{Getting \LaTeX working with VSC}
+In Visual Studio Code verwende ich LaTeX Workshop. 
+Wenn du deinen Privatrechner verwendest, würde ich den Anweisungen auf https://github.com/James-Yu/LaTeX-Workshop/wiki/Install zur Installation folgen.
+Wenn du den Firmenrechner verwenden möchtest, müssen wir MiKTeX und Perl installieren. Beides gibts als User-Install-Versionen.
+
+\section{Die Ordnerstruktur}
+Damit das Projekt übersichtlich bleibt, ist das Repository wie folgt aufgebaut:
+
+\begin{itemize}
+    \item \textbf{main.tex}: Das Hauptdokument. Hier werden Metadaten geändert und alle Kapitel-Dateien angebunden.
+    \item \textbf{Chapters/}: In diesem Ordner liegen alle "Text-Dateien" (Kapitel). Zur organisation werden die einzelnen Texte ausgelagert.
+    \item \textbf{Images/}: Hier kommen Bilder rein. 
+    \item \textbf{JASstyle.sty}: Das CSS pendant in \LaTeX. Hier sind Farben und Layout definiert. \textit{Hinweis: In der Regel musst du hier nichts ändern.}
+    \item \textbf{.vscode/}: Einstellungen für deinen Editor, damit das Dokument beim Speichern automatisch im Hintergrund gebaut wird.
+    \item \textbf{Output/}: Beim Erstellen des PDFs entstehen viele Hilfsdateien (z.B. \texttt{.aux}, \texttt{.log}). Dank der Konfiguration in .vscode\/ landen diese alle gesammelt im \texttt{Output/} Ordner , damit dein Hauptverzeichnis sauber bleibt. Das fertige PDF findest du ebenfalls dort.
+    \item \textbf{.gitignore} \LaTeX generiert sehr viele Dateien, ich habe sie hauptsächlich in den Output Ordner verlagert, aber wir wollen diese trotzdem nicht jedes Mal in das Remote pushen. PDFs (die oft geändert werden) sollten generell nicht getrackt werden, da das Git-Projekt sonst sehr schnell, sehr groß wird.
+\end{itemize}

@@ -1,0 +1,125 @@
+\chapter*{Beispiele}
+
+Jedes Kapitel beginnt mit dem \texttt{\textbackslash Chapter{}} command. Wenn du ein neues erstellst, muss das im neuen Dokument an erster Stelle. Direkt im Anschluss das \texttt{\textbackslash chapteroverlay} -- das ist mein Styling für Kapitelseiten.
+
+\section{Strukturierung}
+Du strukturierst dein Dokument mit Befehlen wie \texttt{\textbackslash section}, \texttt{\textbackslash subsection} und sogar \texttt{\textbackslash subsubsection}. LaTeX kümmert sich automatisch um die Nummerierung und das Inhaltsverzeichnis.
+
+\section{Text formatieren}
+In \LaTeX schreibst du einfach deinen Text. Ein einfacher Zeilenumbruch im Code wird im PDF ignoriert. Für einen neuen Absatz lässt du im Code einfach eine Zeile frei.
+
+\section*{Kurzübersicht: Text-Formatierung}
+
+In der folgenden Tabelle findest du die wichtigsten Befehle für den täglichen Schreibfluss. Nutze diese, um dein Dokument professionell zu setzen:
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.5} % Erhöht den Zeilenabstand in der Tabelle für bessere Lesbarkeit
+\begin{tabular}{p{3.5cm} p{3.5cm} p{6cm}}
+\hline
+\textbf{Ziel} & \textbf{LaTeX-Code} & \textbf{Anmerkung} \\ \hline
+Neuer Absatz & (Leerzeile) & Standardweg für eine logische Trennung. \\
+Manueller Umbruch & \texttt{\textbackslash\textbackslash} & Erzwingt eine neue Zeile (sparsam nutzen!). \\
+Kein Einzug & \texttt{\textbackslash noindent} & Unterdrückt das Einrücken der ersten Zeile. \\
+Schmales Leerzeichen & \texttt{\textbackslash thinspace} & Perfekt für Abkürzungen wie \textit{z.\thinspace B.} \\
+Geschützter Abstand & \texttt{\~} & Verhindert Umbruch (z.\thinspace B. \textit{Prof.~Dr.}). \\
+Sonderzeichen & \texttt{\textbackslash\%} oder \texttt{\textbackslash\$}  & Sonderzeichen haben teilweise Funktionen zugewiesen und müssen escaped werden. \\ \hline
+\end{tabular}
+\caption{Schnellreferenz für Textbefehle}
+\end{table}
+
+\begin{quote}
+    \textbf{Wichtiger Hinweis:} LaTeX kümmert sich um 99\% des Layouts. Wenn du merkst, dass du ständig \texttt{\textbackslash\textbackslash} oder \texttt{\textbackslash noindent} benutzt, stimmt meistens etwas mit der Absatzstruktur nicht.
+\end{quote}
+
+\newpage
+\subsection{Hervorhebungen und Farben}
+Du kannst Text ganz einfach formatieren:
+\begin{itemize}
+    \item \textbf{Dieser Text ist fettgedruckt} (\texttt{\textbackslash textbf\{...\}}).
+    \item \textit{Dieser Text ist kursiv} (\texttt{\textbackslash textit\{...\}}).
+    \item \textcolor{red}{Dieser Text ist farbig} (\texttt{\textbackslash textcolor\{Farbe\}\{...\}}).
+\end{itemize}
+
+\begin{quote}
+    \textbf{Für eigene Farben:} Wenn du eine spezielle Farbe öfter brauchst, kannst du sie in der \texttt{JASstyle.sty} mit \texttt{\textbackslash definecolor\{Name\}\{RGB\}\{R, G, B\}} oder \newline \texttt{\textbackslash definecolor\{Name\}\{HTML\}\{Hex-Werte\}}  einmalig festlegen und dann überall im Dokument über den Namen nutzen.
+\end{quote}
+
+\section{Tabellen \& Aufzählungen}
+Aufzählung mit Bulletpoints:
+\begin{itemize}
+    \item Einführung in textile Techniken und die Kettenwirkerei
+    \item Bindungslehre und die Analyse von Stoffen
+    \item Praktisches Arbeiten an Schulungsmaschinen zur Fehleranalyse und Bedienung
+    \item Technische Kalkulationen und Wartungsmaßnahmen
+\end{itemize}
+
+Aufzählung mit Nummern:
+\begin{enumerate}
+    \item \textbf{Serviceunterstützung und Ersatzteilversorgung:} Ein weltweit vernetztes Team von Experten steht für alle maschinenbezogenen Fragen zur Verfügung. Die Dienstleistungen umfassen Remote Service zur Reduzierung von Stillstandszeiten sowie einen schnellen Ersatzteilservice. Über ein 24/7 zugängliches Kundenportal wird der zielgerichtete Support organisiert.
+    \item \textbf{Wissensvermittlung (Know-how):} Durch langjährige Erfahrung im Textilmaschinenbau unterstützt das Unternehmen Kunden bei der Maschinenbedienung, Wartung und der Textilentwicklung.
+    \item \textbf{Online-Lösungen:} Digitale Services (wie das Kundenportal und die digitalen Produkte) maximieren den Wert der Maschinen durch Konnektivität. Sie liefern wertvolle Erkenntnisse zur Optimierung der Maschinenleistung und zur Steigerung der Gesamtanlageneffektivität (OEE).
+\end{enumerate}
+
+\section{Bilder}
+\begin{figure}[H]
+\centering
+    \includegraphics[scale=0.7]{Images/magins_img.png}
+    \caption{Beispielhaftes Bild mit caption}
+\end{figure}
+
+\section{Codeblocks}
+\begin{lstlisting} [style=csh-clean, caption={Child-Komponente: ruft CRUD Befehle auf}]
+// Der Konstruktor ruft hier das DelegateCCommand auf:
+public DepartmentEditorViewModel(ObservableCollection<DepartmentViewModel> allDepartments, DepartmentDropdownViewModel dropdownVM, Action<Department, string> onDepartmentEdited, Action<Department> onDepartmentDeleted)
+        {
+            ...
+            DeleteDepartmentCommand = new DelegateCommand<Department>(ExecuteDeleteDepartment);
+
+        }
+
+public ICommand DeleteDepartmentCommand { get; }
+
+ private void ExecuteDeleteDepartment(Department dep)
+        {
+            _onDepartmentDeleted?.Invoke(dep);
+            WorkspaceDropdown.SelectedDepartmentId = "";
+            CurrentDepartment = null;
+        }
+\end{lstlisting}
+
+\section{Graphs}
+\begin{tikzpicture}[
+  font=\rmfamily\footnotesize,
+  every matrix/.style={ampersand replacement=\&,column sep=2cm,row sep=.6cm},
+  source/.style={draw,thick,rounded corners,fill=KM_teal!20,inner sep=.3cm},
+  process/.style={draw,thick,circle,fill=blue!20},
+  sink/.style={source,fill=green!20},
+  datastore/.style={draw,very thick,shape=datastore,inner sep=.3cm},
+  dots/.style={gray,scale=2},
+  to/.style={->,>=stealth',shorten >=1pt,semithick,font=\rmfamily\scriptsize},
+  every node/.style={align=center}]
+
+  % Position the nodes using a matrix layout
+  \matrix{
+    \node[source] (a) {ChildViewModel}; \& \& \\
+     \& \& \node[source] (b) {DataModels};\\
+     \node[source] (c) {ParentViewModel}; \& \node[source] (d) {DataProvider};\\
+     \& \& \node[source] (e) {DataViewModels};\\
+     \node[source] (f) {MainViewModel}; \& \& \\      
+  };
+
+% Draw the arrows between the nodes and label them.
+\draw[to] (a) -- node[midway, right]{calls event \& passes data} (c);    
+  \draw[to] (c) -- node[midway,right] {passes event data} (f);
+  \draw[to] (f) to[bend right=20] node[midway,below] {passes event data} (d);
+  \draw[to] (f) to[bend right=20] node[midway,below] {passes event data} (e);
+  \draw[to] (d)-- node[midway,below] {new data is saved} (b);
+  % Draw the dotted surrounding lines and add the labels as separate nodes
+  % This is necessary because the anchor of the fitted node is always center
+
+  \node[draw,dotted,fit=(a) (c) (d) (f),inner sep=4ex,] (ACDF) {};
+  \node[above=-3ex of ACDF] (ACDFt) {Logic execution};
+  \node[draw,dotted,fit=(b) (e), inner sep=4ex] (BE) {};
+  \node[above=-3ex of BE] (Bet) {Data storage};
+\end{tikzpicture}
