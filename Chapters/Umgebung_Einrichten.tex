@@ -17,3 +17,21 @@ Damit das Projekt übersichtlich bleibt, ist das Repository wie folgt aufgebaut:
     \item \textbf{Output/}: Beim Erstellen des PDFs entstehen viele Hilfsdateien (z.B. \texttt{.aux}, \texttt{.log}). Dank der Konfiguration in .vscode\/ landen diese alle gesammelt im \texttt{Output/} Ordner , damit dein Hauptverzeichnis sauber bleibt. Das fertige PDF findest du ebenfalls dort.
     \item \textbf{.gitignore} \LaTeX generiert sehr viele Dateien, ich habe sie hauptsächlich in den Output Ordner verlagert, aber wir wollen diese trotzdem nicht jedes Mal in das Remote pushen. PDFs (die oft geändert werden) sollten generell nicht getrackt werden, da das Git-Projekt sonst sehr schnell, sehr groß wird.
 \end{itemize}
+
+\begin{tcolorbox}[infoBox]
+        \textcolor{red}{\textbf{NOTE}}: Alt + Z toggelt in VSCode \textit{wrap lines}, was ich für tex dateien angenehmer finde.
+\end{tcolorbox}
+
+\section{Release}
+Weil wir sowohl den Output ordner als auf .pdf in der .gitignore haben wird die PDF nicht autmoatisch hochgeladen. Die PDF kann in GitHub über ein Release hinzugefügt werden.
+\begin{figure}[H]
+\centering
+    \includegraphics[scale=0.8]{Images/git_release.png}
+    \caption{Workflow}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+    \includegraphics[scale=0.45]{Images/Screenshot git_release.png}
+    \caption{Release Bereich in GitHub}
+\end{figure}

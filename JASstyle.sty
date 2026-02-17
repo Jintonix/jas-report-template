@@ -140,6 +140,7 @@
 % --------------------------------------------
 \RequirePackage{listings} %used to show codeblocks
 \RequirePackage{minted}% better syntax highlighting
+\RequirePackage{fontawesome5} % for the info icon
 
 % ---- Custom commands   ----
 % ---------------------------
@@ -232,3 +233,21 @@
     tabsize=4,
     showstringspaces=false,
 }
+
+% --- Custom Boxees   ---
+% -----------------------
+\tcbset{
+infoBox/.style={
+    colback={red!10},   % light peach background
+    left=10mm, right=2mm, top=2mm, bottom=2mm, % padding
+    boxrule=0pt,              % no full box border
+    borderline west={2pt}{0pt}{red}, % only left border
+    enhanced,                 % enable advanced options
+    drop shadow,
+    rounded corners,
+    overlay={
+    \node[anchor=north west, xshift=3mm, yshift=-2mm] at (frame.north west)
+    {
+    \textcolor{red}{\faInfoCircle}};
+    }
+}}

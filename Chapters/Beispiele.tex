@@ -132,6 +132,7 @@ Name 4 & Code 4 & Die 4 Beschreibung dazu  \\
     \includegraphics[scale=0.7]{Images/magins_img.png}
     \caption{Beispielhaftes Bild mit caption}
 \end{figure}
+Mit der scale könnt ihr die Größe vom Bild ändern.
 
 % ---------------------------
 % ----------- CODE ----------
@@ -147,7 +148,20 @@ public ICommand DeleteDepartmentCommand { get; }
             CurrentDepartment = null;
         }
 \end{lstlisting}
+Abgesehen von farbänderungen ist das highlighten von Keywords der einzige Grund wieso ihr in die .sty Datei müsst. Dort gibt es in der CUSTOM COMMANDS \& MACROS -Section einen Bereich \textbackslash lstdefinelanguage\{csharp\}
+\begin{figure}[H]
+\centering
+    \includegraphics[scale=0.65]{Images/Screenshot_sty.png}
+    \caption{Codeblock styling}
+\end{figure}
+\noindent Hier könnt ihr Keywords ergänzen, je nach dem welche Farbe der Text dann haben soll, und er wird im Codeblock gefärbt.
+\begin{tcolorbox}[infoBox]
+        \textcolor{red}{\textbf{NOTE}}: z.Z. ist es noch etwas buggy und manchmal werden sie, obwohl sie in der Liste sind, nicht gehighlightet...
+\end{tcolorbox}
 
+% ---------------------------
+% ---------- GRAPH ----------
+% ---------------------------
 \section{Graphs}
 \begin{tikzpicture}[
   font=\rmfamily\footnotesize,
