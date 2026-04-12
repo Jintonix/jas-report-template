@@ -1,0 +1,78 @@
+\ProvidesPackage{lang-csh}[2026/04/12 v1.0 C# Styles]
+% --------------------------------------------
+% ----------------- PACKAGES -----------------
+% --------------------------------------------
+\RequirePackage{listings} %used to show codeblocks
+\captionsetup[listing]{skip=-7pt} %adjust caption distance to object
+
+% --------------------------------------------
+% ------------------ COLORS ------------------
+% --------------------------------------------
+\RequirePackage{xcolor}
+
+% colring for blazor code
+\definecolor{Blazor_purple}{RGB}{92, 45, 145}
+\definecolor{vsPink}{HTML}{C586C0}
+\definecolor{vsBlue}{HTML}{2472B3}
+\definecolor{vsTeal}{HTML}{4EC9B0}
+\definecolor{vsYellow}{HTML}{EBBB4B}
+\definecolor{vsOrange}{HTML}{CE9178}
+\definecolor{vsGreen}{HTML}{6A9955}
+\definecolor{vsLightBlue}{HTML}{9CDCFE}
+\definecolor{vsLimeGreen}{HTML}{3ECF75}
+
+
+% --------------------------------------------
+% ------------- Codeblock styling ------------
+% --------------------------------------------
+% Custom C-sharp
+\lstdefinelanguage{csharp}{
+    % --- 1. Basic Keywords ---
+    keywords=[1]{if, foreach, while, else, in, return,case, break },
+    keywordstyle=[1]\color{vsPink}\bfseries,
+    morekeywords=[2]{using, namespace, public, private, protected, override, class, event, readonly, string, int, new, void, this, new, get, set, null, object, nameof, bool, async, true, false, var, this, typeof, value },
+    keywordstyle=[2]\color{vsBlue}\bfseries,
+    % classes
+    morekeywords=[3]{Task,Parameter, Console, List, ObservableCollection, PropertyChangedEventArgs, Action, PropertyChangedEventHandler, RenderFragment, DelegateCommand},
+    keywordstyle=[3]\color{vsTeal}\bfseries,
+    % functions
+    morekeywords=[4]{Delay, StateHasChanged, IsNullOrWhiteSpace, HandleKeyUp, Execute, OnInitialized, InvokeAsync, HandlePropertyChanged, FirstOrDefault, Invoke, WriteLine, Remove, First, Add, ContainsKey, Equals, OnPropertyChanged, Dispose, AddRange, Where, ToLowerInvariant, Contains, ICommand },
+    keywordstyle=[4]\color{vsYellow}\bfseries,
+    % special Types
+    morekeywords=[5]{KeyValuePair, TimeSpan, DateTime, SearchSelections},
+    keywordstyle=[5]\color{vsLimeGreen}\bfseries,
+    % --- 2. Custom keywords ---
+    % variables
+    morekeywords=[6]{e, _, __, val, newDepartment, sender, builder, machineNames, machineValues, keyValues, pieConfig, propertyName, selectedSearchFilterOptions, tempObjects,  searchQuery, filter, selectedSearchFilterOptions, onDepartmentDeleted,  onDepartmentEdited, dropdownVM, allDepartments, dep, department, departmentList},
+    keywordstyle=[6]\color{vsLightBlue}\bfseries,
+    % function calls
+    morekeywords=[7]{UpdateDepartment, RenderPieChart, OpenComponent, AddAttribute,CloseComponent, configurePieConfig, UpdateRenderedErrorCodeEditObjects, ExecuteDeleteDepartment, DeleteDepartment, UpdateDepartmentJson, Convert_Departments_to_json },
+    keywordstyle=[7]\color{vsYellow}\bfseries,
+    % Classes
+    morekeywords=[8]{Department, WorkSpace, Machine, MachineProgram, MetaDataProgramEditObject, MetaDataWorkSpaceEditObject, DepartmentViewMode, MetaDataErrorCodeEditObject,DepartmentViewModel, DepartmentEditorViewModel, DepartmentDropdownViewModel, JsonDeSerializer},
+    keywordstyle=[8]\color{vsTeal}\bfseries,
+    % --- 3. Comments ---
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{vsGreen}\itshape,
+    % --- 4. Strings ---
+    morestring=[b]",
+    morestring=[b]',
+    stringstyle=\color{brown},
+    % --- 5. Symbols & Operators ---
+    % Instead of keywords, we use literate for symbols
+    literate={{=>}{{{\textit{\color{gray}=>}}}}2
+             {==}{{{\textit{\color{gray}==}}}}2
+             {++}{{{\textit{\color{gray}++}}}}2
+             {!=}{{{\textit{\color{gray}!=}}}}2
+             {+=}{{{\textit{\color{vsYellow}+=}}}}2
+             },
+    % 6. Cleanup
+    sensitive=true,
+}
+
+% style code box
+\lstdefinestyle{csh-clean}{
+    style=base-clean,
+    language=csharp
+}
