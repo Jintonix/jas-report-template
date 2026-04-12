@@ -1,3 +1,4 @@
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{JASstyle}[2026/04/12 v1.0 Base Styling]
 %--- TODOs ---
 % TODO-1: figure out how to change \titlespacing for every header individually
@@ -225,4 +226,6 @@
 
 % ------- Project specific macros -------
 % ---------------------------------------
+% depending on if the macros file is tex or sty
 \IfFileExists{macros.tex}{\input{macros.tex}}{}
+% \IfFileExists{macros.sty}{\usepackage{macros}}{} 
