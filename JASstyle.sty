@@ -52,6 +52,11 @@
 \definecolor{orange}{RGB}{252, 202, 40}
 \definecolor{teal}{RGB}{0, 140, 125}
 
+\definecolor{boxheader}{HTML}{00414d} 
+\definecolor{boxborder}{HTML}{01565c} 
+\definecolor{boxbg}{HTML}{ededfc}
+\definecolor{wordcolor}{HTML}{18666b}
+
 % --------------------------------------------
 % ------------ HEADERS & FOOTERS -------------
 % --------------------------------------------
@@ -175,6 +180,10 @@
 % --------------------------------------------
 % -------- CUSTOM COMMANDS & MACROS   --------
 % --------------------------------------------
+% tcbset -> Interace to inherit from
+% newtcbox -> for shorter atomic, inline snippets (it shrinkwraps the content however)
+% newtcolorbox -> A class to implement, for large blocks of text
+% newtcblisting -> A sub-class specifically for code
 
 % ---- Custom commands   ----
 % ---------------------------
@@ -222,6 +231,45 @@
   top=1pt,
   bottom=1pt,
   fontupper=\ttfamily
+}
+
+\newtcolorbox{infoBox}{
+    enhanced,
+    colback=red!10,
+    colframe=red,
+    boxrule=0pt,
+    borderline west={2pt}{0pt}{red},
+    sharp corners,
+    rounded corners=southeast,
+    arc=2mm,
+    drop shadow,
+    left= 10mm, right=2mm, top=2mm, bottom=2mm,
+    % The Icon Overlay
+    overlay={
+        \node[anchor=north west, xshift=2mm, yshift=-0.75mm] 
+        at (frame.north west) 
+        {\Large\textcolor{red}{\faInfoCircle}};
+    }
+}
+
+\newtcolorbox{worddefinition}[1]{
+    enhanced,
+    boxrule=1pt,
+    arc=2mm,
+    colback=boxbg,
+    colframe=boxborder,
+    fontupper=\normalsize,
+    % upper box
+    attach boxed title to top left={xshift=3mm, yshift=-3mm, yshifttext=-1mm},
+    boxed title style={
+        colback=boxheader,
+        colframe=boxheader,
+        arc=1.5mm,
+        outer arc=1mm,
+    },
+    title={Definition},
+    % Fcontent
+    before upper={\textbf{\large\textcolor{wordcolor}{#1}}\\[0.4em]}
 }
 
 % ------- Project specific macros -------
